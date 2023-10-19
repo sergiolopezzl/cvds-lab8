@@ -45,6 +45,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '17'
+        distribution: 'adopt'  # Especifica la distribución, por ejemplo, 'adopt' o 'adopt-hotspot'
 
     - name: Build with Maven (Compile Only)
       run: mvn compile --file pom.xml
@@ -61,10 +62,11 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '17'
+        distribution: 'adopt'  # Especifica la distribución, por ejemplo, 'adopt' o 'adopt-hotspot'
 
     - name: Test with Maven (Verify)
       run: mvn verify --file pom.xml
-
+      
   deploy:
     runs-on: ubuntu-latest
 
