@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="fragments/general.html::headerfiles('Example Page')"></th:block>
+<body>
+<main>
+    <h2 class="display-6 text-center mb-4">To Do Item</h2>
+    <div class="table-responsive">
+        <table class="table table-info">
+            <thead>
+            <tr>
+                <th scope="col">Property</th>
+                <th scope="col">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">id</th>
+                <td><p th:text="${toDoItem.id}"/></td>
+            </tr>
+            <tr>
+                <th scope="row">user id</th>
+                <td><p th:text="${toDoItem.userId}"/></td>
+            </tr>
+            <tr>
+                <th scope="row">title</th>
+                <td><p th:text="${toDoItem.title}"/></td>
+            </tr>
+            <tr>
+                <th scope="row">completedd</th>
+                <td><p th:text="${toDoItem.completed}"/></td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <a type="button" class="btn btn-primary btn-lg px-4 gap-3" href="/example">Go to example</a>
+        <a type="button" class="btn btn-outline-secondary btn-lg px-4" href="/employe">Go to "To Do" Table</a>
+    </div>
+</main>
+<footer th:replace="fragments/general::empty-footer"></footer>
+</body>
+</html>
