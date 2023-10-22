@@ -1,4 +1,4 @@
-package co.edu.escuelaing.cvds.lab7.model;
+package co.edu.escuelaing.cvds.lab8.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

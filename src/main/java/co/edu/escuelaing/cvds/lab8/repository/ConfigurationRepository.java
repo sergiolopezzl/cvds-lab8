@@ -1,6 +1,6 @@
-package co.edu.escuelaing.cvds.lab7.repository;
+package co.edu.escuelaing.cvds.lab8.repository;
 
-import co.edu.escuelaing.cvds.lab7.model.Configuration;
+import co.edu.escuelaing.cvds.lab8.model.Configuration;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

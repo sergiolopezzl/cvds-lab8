@@ -1,7 +1,7 @@
-package co.edu.escuelaing.cvds.lab7.service;
+package co.edu.escuelaing.cvds.lab8.service;
 
-import co.edu.escuelaing.cvds.lab7.model.Employee;
-import co.edu.escuelaing.cvds.lab7.repository.EmployeeRepository;
+import co.edu.escuelaing.cvds.lab8.model.Employee;
+import co.edu.escuelaing.cvds.lab8.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

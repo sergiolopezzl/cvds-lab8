@@ -1,6 +1,6 @@
-package co.edu.escuelaing.cvds.lab7.controller;
+package co.edu.escuelaing.cvds.lab8.controller;
 
-import co.edu.escuelaing.cvds.lab7.model.ToDoItem;
+import co.edu.escuelaing.cvds.lab8.model.ToDoItem;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
