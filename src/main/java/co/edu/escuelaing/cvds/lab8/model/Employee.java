@@ -11,29 +11,32 @@ public class Employee {
     @Id
     @Column(name = "employeeId")
     private Long employeeId;
-
     @Column(name = "firstName")
     private String firstName;
-
     @Column(name = "lastName")
     private String lastName;
+    @Column(name = "sexoBiologico")
+    private SexoBiologico sexoBiologico;
     @Column(name = "role")
     private String role;
     @Column(name = "salary")
     private String salary;
-
+    @Column(name = "idEmpresa")
+    private String idEmpresa;
 
 
     public Employee() {
 
     }
 
-    public Employee(Long employeeId, String firstName, String lastName, String role, String salary) {
+    public Employee(Long employeeId, String firstName, String lastName, SexoBiologico sexoBiologico, String role, String salary, String idEmpresa) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.sexoBiologico = sexoBiologico;
         this.role = role;
         this.salary = salary;
+        this.idEmpresa = idEmpresa;
     }
 
     public Long getEmployeeId() {
@@ -60,6 +63,14 @@ public class Employee {
         this.lastName = lastName;
     }
 
+    public SexoBiologico getSexoBiologico() {
+        return sexoBiologico;
+    }
+
+    public void setSexoBiologico(SexoBiologico sexoBiologico) {
+        this.sexoBiologico = sexoBiologico;
+    }
+
     public String getRole() {
         return role;
     }
@@ -75,6 +86,15 @@ public class Employee {
     public void setSalary(String salary) {
         this.salary = salary;
     }
+
+    public String getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(String idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+
     // Getters and setters
 
     @Override
@@ -82,22 +102,24 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(employeeId, employee.employeeId) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(role, employee.role) && Objects.equals(salary, employee.salary);
+        return Objects.equals(employeeId, employee.employeeId) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && sexoBiologico == employee.sexoBiologico && Objects.equals(role, employee.role) && Objects.equals(salary, employee.salary) && Objects.equals(idEmpresa, employee.idEmpresa);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(employeeId, firstName, lastName, role, salary);
+        return Objects.hash(employeeId, firstName, lastName, sexoBiologico, role, salary, idEmpresa);
     }
 
     @Override
     public String toString() {
         return "Employee{" +
-                "employeeId='" + employeeId + '\'' +
+                "employeeId=" + employeeId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", sexoBiologico=" + sexoBiologico +
                 ", role='" + role + '\'' +
-                ", salary=" + salary +
+                ", salary='" + salary + '\'' +
+                ", idEmpresa='" + idEmpresa + '\'' +
                 '}';
     }
 }

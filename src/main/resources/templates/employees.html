@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Gestión de Empleados</title>
     <style>
+
         body {
             font-family: Arial, sans-serif;
             margin: 40px;
@@ -17,7 +18,7 @@
         table {
             margin: 0 auto;
             border-collapse: collapse;
-            width: 75%;
+            width: 70%;
         }
         th, td {
             border: 3px solid #ccc;
@@ -38,7 +39,7 @@
         }
         input {
             padding: 8px;
-            width: 55%;
+            width: 40%;
             margin-bottom: 10px;
         }
         button {
@@ -70,6 +71,19 @@
         .tab-button:hover {
             background-color: #6A1F70;
         }
+        .label {
+            padding: 7px;
+        }
+        /* Estilo para el menú desplegable */
+        .select {
+            width: 724px;
+            padding: 9px;
+            border: 1px solid #5F5F5F;
+            border-radius: 1px;
+            background-color: #f9f9f9;
+            color: #333;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -82,13 +96,16 @@
 </div>
 <div id="lista" class="tab">
     <table>
+
         <thead>
         <tr>
             <th>ID</th>
             <th>Nombre</th>
             <th>Apellido</th>
+            <th>Sexo Biologico</th>
             <th>Rol</th>
             <th>Salario</th>
+            <th>Empresa</th>
         </tr>
         </thead>
         <tbody>
@@ -96,8 +113,10 @@
             <td th:text="${employee.employeeId}"></td>
             <td th:text="${employee.firstName}"></td>
             <td th:text="${employee.lastName}"></td>
+            <td th:text="${employee.sexoBiologico}"></td>
             <td th:text="${employee.role}"></td>
             <td th:text="${employee.salary}"></td>
+            <td th:text="${employee.idEmpresa}"></td>
         </tr>
         </tbody>
     </table>
@@ -106,7 +125,7 @@
     <h1>Crear Empleado</h1>
     <form th:action="@{/employees/create}" method="post" onsubmit="return confirm('¿Está seguro de que desea crear un empleado?')">
         <label for="employeeId">ID del Empleado:*</label>
-        <input type="text" id="employeeId" name="employeeId" required><br>
+        <input type="number" id="employeeId" name="employeeId" required><br>
 
         <label for="firstName">Nombre del Empleado:*</label>
         <input type="text" id="firstName" name="firstName" required><br>
@@ -114,11 +133,23 @@
         <label for="lastName">Apellido del Empleado:*</label>
         <input type="text" id="lastName" name="lastName" required><br>
 
-        <label for="role">Rol del Empleado:*</label>
+        <label for="sexoBiologico">Sexo Biológico del Empleado:*</label>
+        <select id="sexoBiologico" name="sexoBiologico" required class="select">
+            <option value="">Seleccionar opción</option> <!-- Opción de sin selección -->
+            <option value="MASCULINO">Masculino</option>
+            <option value="FEMENINO">Femenino</option>
+            <option value="INTERSEXUAL">Intersexual</option>
+            <option value="NO_ESPECIFICADO">No Especificado</option>
+        </select><br>
+
+        <label for="role" class="label">Rol del Empleado:*</label>
         <input type="text" id="role" name="role" required><br>
 
         <label for="salary">Salario del Empleado:*</label>
         <input type="number" id="salary" name="salary" required><br>
+
+        <label for="idEmpresa">Empresa del Empleado:*</label>
+        <input type="number" id="idEmpresa" name="idEmpresa" required><br>
 
         <button type="submit">Crear Empleado</button>
     </form>
@@ -128,7 +159,7 @@
     <h1>Escriba SOLO los atributos que desea actualizar del Empleado</h1>
     <form th:action="@{/employees/update}" method="post" onsubmit="return confirm('¿Está seguro de que desea actualizar al empleado?')">
         <label for="employeeIud">ID del Empleado YA EXISTENTE para actualizar:*</label>
-        <input type="text" id="employeeIud" name="employeeId" required><br>
+        <input type="number" id="employeeIud" name="employeeId" required><br>
 
         <label for="firstNameud">Actualiza Nombre del Empleado:</label>
         <input type="text" id="firstNameud" name="firstName" ><br>
@@ -136,11 +167,23 @@
         <label for="lastNameud">Actualiza Apellido del Empleado:</label>
         <input type="text" id="lastNameud" name="lastName" ><br>
 
-        <label for="roleud">Actualiza Rol del Empleado:</label>
+        <label for="sexoBiologicoud">Sexo Biológico del Empleado:</label>
+        <select id="sexoBiologicoud" name="sexoBiologico" class="select">
+            <option value="">Seleccionar opción</option> <!-- Opción de sin selección -->
+            <option value="MASCULINO">Masculino</option>
+            <option value="FEMENINO">Femenino</option>
+            <option value="INTERSEXUAL">Intersexual</option>
+            <option value="NO_ESPECIFICADO">No Especificado</option>
+        </select><br>
+
+        <label for="roleud" class="label">Actualiza Rol del Empleado:</label>
         <input type="text" id="roleud" name="role" ><br>
 
         <label for="salaryud">Actualiza Salario del Empleado:</label>
         <input type="number" id="salaryud" name="salary" ><br>
+
+        <label for="idEmpresaud">Actualiza Empresa del Empleado:</label>
+        <input type="number" id="idEmpresaud" name="idEmpresa" ><br>
 
         <button type="submit">Actualizar empleado</button>
     </form>

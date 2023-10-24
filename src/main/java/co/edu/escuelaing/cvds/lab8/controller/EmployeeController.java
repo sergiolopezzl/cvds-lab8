@@ -1,5 +1,6 @@
 package co.edu.escuelaing.cvds.lab8.controller;
 import co.edu.escuelaing.cvds.lab8.model.Employee;
+import co.edu.escuelaing.cvds.lab8.model.SexoBiologico;
 import co.edu.escuelaing.cvds.lab8.service.ConfigurationService;
 import co.edu.escuelaing.cvds.lab8.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +26,14 @@ public class EmployeeController {
         return "employees";
     }
     @PostMapping("/employees/create")
-    public String createEmployee(@RequestParam Long employeeId, String firstName,String lastName,String role ,String salary){
-        employeeService.createEmployee(employeeId, firstName, lastName, role, salary);
+    public String createEmployee(@RequestParam Long employeeId, String firstName,String lastName,SexoBiologico sexoBiologico, String role ,String salary, String idEmpresa){
+        employeeService.createEmployee(employeeId, firstName, lastName,sexoBiologico, role, salary, idEmpresa);
         return "redirect:/employees"; // Redirige a la página de lista de empleados después de la creación.
     }
 
     @PostMapping("/employees/update")
-    public String updateEmployee(@RequestParam Long employeeId, String firstName,String lastName,String role ,String salary){
-        employeeService.updateEmployee(employeeId, firstName, lastName, role, salary);
+    public String updateEmployee(@RequestParam Long employeeId, String firstName,String lastName,SexoBiologico sexoBiologico, String role ,String salary, String idEmpresa){
+        employeeService.updateEmployee(employeeId, firstName, lastName, sexoBiologico, role, salary, idEmpresa);
         return "redirect:/employees"; // Redirige a la página de lista de empleados después de la actualización.
     }
 
