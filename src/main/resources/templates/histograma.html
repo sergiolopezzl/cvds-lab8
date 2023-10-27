@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Salario Promedio</title>
+</head>
+<body>
+<h1>Salario Promedio por Empleado</h1>
+<p>El salario promedio por empleado es: <span th:text="${salarioPromedio}"></span></p>
+
+<meta charset="utf-8">
+<title>Histograma de Salario</title>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<style>
+        /* Estilos CSS para el histograma */
+        .bar {
+            fill: steelblue;
+        }
+
+        .bar:hover {
+            fill: orange;
+        }
+
+        .axis-label {
+            font-size: 12px;
+        }
+    </style>
+</body>
+<body>
+<h1>Histograma de Salario</h1>
+
+<div id="histogram"></div>
+
+<script>
+        // Datos de salario
+        var salarioData = [/*  */];
+
+        var margin = { top: 20, right: 30, bottom: 40, left: 40 },
+            width = 600 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
+
+        var svg = d3.select("#histogram")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var x = d3.scaleLinear()
+            .domain([0, d3.max(salarioData, function (d) { return d.salario; })])
+            .nice()
+            .range([0, width]);
+
+        var bins = d3.histogram()
+            .domain(x.domain())
+            .thresholds(x.ticks(10))
+            (salarioData.map(function (d) { return d.salario; }));
+
+        var y = d3.scaleLinear()
+            .domain([0, d3.max(bins, function (d) { return d.length; })])
+            .nice()
+            .range([height, 0]);
+
+        var bar = svg.selectAll(".bar")
+            .data(bins)
+            .enter()
+            .append("g")
+            .attr("class", "bar")
+            .attr("transform", function (d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; });
+
+        bar.append("rect")
+            .attr("x", 1)
+            .attr("width", function (d) { return x(d.x1) - x(d.x0) - 1; })
+            .attr("height", function (d) { return height - y(d.length); });
+
+        bar.append("text")
+            .attr("dy", "-0.5em")
+            .attr("y", 6)
+            .attr("x", (x(bins[0].x1) - x(bins[0].x0)) / 2)
+            .attr("text-anchor", "middle")
+            .text(function (d) { return d.length; });
+
+        // Eje X
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        // Etiqueta del eje X
+        svg.append("text")
+            .attr("class", "axis-label")
+            .attr("x", width / 2)
+            .attr("y", height + margin.bottom)
+            .style("text-anchor", "middle")
+            .text("Salario");
+
+        // Eje Y
+        svg.append("g")
+            .attr("class", "y axis")
+            .call(d3.axisLeft(y));
+
+        // Etiqueta del eje Y
+        svg.append("text")
+            .attr("class", "axis-label")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -height / 2)
+            .attr("y", -margin.left)
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .text("Frecuencia");
+    </script>
+<!-- Aquí puedes agregar gráficos u otros elementos para mostrar la información de manera visual. -->
+</body>
+

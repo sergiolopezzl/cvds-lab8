@@ -1,6 +1,7 @@
 package co.edu.escuelaing.cvds.lab8.service;
 
 import co.edu.escuelaing.cvds.lab8.model.Employee;
+import co.edu.escuelaing.cvds.lab8.model.Empresa;
 import co.edu.escuelaing.cvds.lab8.model.SexoBiologico;
 import co.edu.escuelaing.cvds.lab8.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class EmployeeService {
         employeeRepository.save(employee);
     }
 
+    public Employee getEmployeeById(Long id) {
+        return employeeRepository.findById(id).orElse(null);
+    }
     public List<Employee> getAll(){
         return employeeRepository.findAll();
     }
@@ -59,4 +63,10 @@ public class EmployeeService {
     }
 
 
+    public void createEmployee(Employee employee) {
+        employeeRepository.save(employee);
+    }
+
+    public void updateEmployee(Long employeeId, Employee employee) {
+    }
 }

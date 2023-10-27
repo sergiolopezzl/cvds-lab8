@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estadísticas de Empleados</title>
+    <!-- Incluye la librería Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+<h1>Estadísticas de Empleados</h1>
+
+<!-- Botón para cargar y mostrar el Histograma de Salario -->
+<button onclick="loadSalaryHistogram()">Histograma de Salario</button>
+<div id="salaryHistogramChart"></div>
+
+<!-- Botón para cargar y mostrar el Número de empleados por empresa -->
+<button onclick="loadEmployeesPerCompany()">Número de Empleados por Empresa</button>
+<div id="employeesPerCompanyChart"></div>
+
+<!-- Botón para cargar y mostrar el Salario promedio por empresa -->
+<button onclick="loadAverageSalaryPerCompany()">Salario Promedio por Empresa</button>
+<div id="averageSalaryPerCompanyChart"></div>
+
+<!-- Botón para cargar y mostrar los Gastos en salario de las empresas registradas en el sistema -->
+<button onclick="loadSalaryExpensesByCompany()">Gastos en Salario de Empresas</button>
+<div id="salaryExpensesByCompanyChart"></div>
+
+<!-- Botón para cargar y mostrar Personas por sexo en la base de datos -->
+<button onclick="loadPersonsByGender()">Personas por Sexo</button>
+<div id="personsByGenderChart"></div>
+
+<script>
+        google.charts.load('current', { 'packages': ['corechart'] });
+
+        // Funciones para cargar y mostrar gráficos
+        function loadSalaryHistogram() {
+            // Llama a la API para obtener datos del Histograma de Salario y dibuja el gráfico
+            // Reemplaza 'data' y 'options' con tus datos reales
+            var data = google.visualization.arrayToDataTable([
+                ['Salario', 'Número de Empleados'],
+                ['1000', 5],
+                ['2000', 8],
+                ['3000', 12],
+                // ... Agrega más datos según tu necesidad
+            ]);
+            var options = {
+                title: 'Histograma de Salario',
+                histogram: { bucketSize: 1000 },
+            };
+            var chart = new google.visualization.Histogram(document.getElementById('salaryHistogramChart'));
+            chart.draw(data, options);
+        }
+
+        function loadEmployeesPerCompany() {
+            // Llama a la API para obtener datos del Número de Empleados por Empresa y dibuja el gráfico
+            // Reemplaza 'data' y 'options' con tus datos reales
+            var data = google.visualization.arrayToDataTable([
+                ['Empresa', 'Número de Empleados'],
+                ['Empresa A', 10],
+                ['Empresa B', 15],
+                ['Empresa C', 20],
+                // ... Agrega más datos según tu necesidad
+            ]);
+            var options = {
+                title: 'Número de Empleados por Empresa',
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('employeesPerCompanyChart'));
+            chart.draw(data, options);
+        }
+
+        function loadAverageSalaryPerCompany() {
+            // Llama a la API para obtener datos del Salario Promedio por Empresa y dibuja el gráfico
+            // Reemplaza 'data' y 'options' con tus datos reales
+            var data = google.visualization.arrayToDataTable([
+                ['Empresa', 'Salario Promedio'],
+                ['Empresa A', 2500],
+                ['Empresa B', 2800],
+                ['Empresa C', 3000],
+                // ... Agrega más datos según tu necesidad
+            ]);
+            var options = {
+                title: 'Salario Promedio por Empresa',
+            };
+            var chart = new google.visualization.BarChart(document.getElementById('averageSalaryPerCompanyChart'));
+            chart.draw(data, options);
+        }
+
+        function loadSalaryExpensesByCompany() {
+            // Llama a la API para obtener datos de Gastos en Salario de Empresas y dibuja el gráfico
+            // Reemplaza 'data' y 'options' con tus datos reales
+            var data = google.visualization.arrayToDataTable([
+                ['Empresa', 'Gastos en Salario'],
+                ['Empresa A', 25000],
+                ['Empresa B', 35000],
+                ['Empresa C', 40000],
+                // ... Agrega más datos según tu necesidad
+            ]);
+            var options = {
+                title: 'Gastos en Salario de Empresas',
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('salaryExpensesByCompanyChart'));
+            chart.draw(data, options);
+        }
+
+        function loadPersonsByGender() {
+            // Llama a la API para obtener datos de Personas por Sexo y dibuja el gráfico
+            // Reemplaza 'data' y 'options' con tus datos reales
+            var data = google.visualization.arrayToDataTable([
+                ['Sexo', 'Número de Personas'],
+                ['Masculino', 30],
+                ['Femenino', 25],
+                ['Intersexual', 5],
+                ['No Especificado', 10],
+                // ... Agrega más datos según tu necesidad
+            ]);
+            var options = {
+                title: 'Personas por Sexo',
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('personsByGenderChart'));
+            chart.draw(data, options);
+        }
+    </script>
+</body>
+</html>
