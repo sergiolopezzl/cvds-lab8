@@ -28,7 +28,7 @@ public class Lab8ApplicationTest {
 
     @Test
     public void testConsultaExitosaConEmpleadoRegistrado() {
-        // Configurar un escenario de prueba con un empleado registrado
+        // escenario de prueba con un empleado registrado
         Employee empleadoRegistrado = new Employee(1L, "Nombre", "Apellido", SexoBiologico.MASCULINO, "Rol", "Salario", "IdEmpresa");
         when(employeeRepository.findAll()).thenReturn(Collections.singletonList(empleadoRegistrado));
 
@@ -47,7 +47,7 @@ public class Lab8ApplicationTest {
 
     @Test
     public void testConsultaSinResultadosCuandoNoHayEmpleadosRegistrados() {
-        // Configurar un escenario de prueba sin empleados registrados
+        // escenario de prueba sin empleados registrados
         when(employeeRepository.findAll()).thenReturn(Collections.emptyList());
 
         // Ejecutar la prueba
@@ -69,5 +69,5 @@ public class Lab8ApplicationTest {
         verify(employeeRepository, times(1)).save(empleadoACrear);
     }
 
-    // Agrega pruebas para los otros escenarios según sea necesario (actualización, eliminación, etc.)
+
 }

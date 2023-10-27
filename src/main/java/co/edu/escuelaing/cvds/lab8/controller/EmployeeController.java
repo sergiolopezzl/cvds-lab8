@@ -15,13 +15,17 @@ public class EmployeeController {
 
     @Autowired
     EmployeeService employeeService;
-
+    @GetMapping("/graficas")
+    public String graficas(Model model) {
+        double salarioPromedio = employeeService.calcularSalarioPromedio();
+        model.addAttribute("salarioPromedio", salarioPromedio);
+        return "graficas"; // Nombre de la vista para mostrar el salario promedio.
+    }
 
     @GetMapping("/employees")
     public String employees(Model model) {
         List<Employee> employeeList = employeeService.getAll();
         //employeeService.createEmployee(id,name);
-
         model.addAttribute("employeeList", employeeList);
         return "employees";
     }
@@ -34,7 +38,7 @@ public class EmployeeController {
     @PostMapping("/employees/update")
     public String updateEmployee(@RequestParam Long employeeId, String firstName,String lastName,SexoBiologico sexoBiologico, String role ,String salary, String idEmpresa){
         employeeService.updateEmployee(employeeId, firstName, lastName, sexoBiologico, role, salary, idEmpresa);
-        return "redirect:/employees"; // Redirige a la página de lista de empleados después de la actualización.
+        return "redirect:/graficas"; // Redirige a la página de lista de empleados después de la actualización.
     }
 
     @PostMapping("/employees/delete")

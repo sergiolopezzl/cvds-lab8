@@ -5,6 +5,7 @@ import co.edu.escuelaing.cvds.lab8.model.SexoBiologico;
 import co.edu.escuelaing.cvds.lab8.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -44,7 +45,18 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
+    public double calcularSalarioPromedio() {
+        List<Employee> employees = employeeRepository.findAll();
+        if (employees.isEmpty()) {
+            return 0.0; // Manejo de caso vacío para evitar divisiones por cero.
+        }
 
+        double totalSalario = employees.stream()
+                .mapToDouble(employee -> Double.parseDouble(employee.getSalary()))
+                .sum();
+
+        return totalSalario / employees.size();
+    }
 
 
 }

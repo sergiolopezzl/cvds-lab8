@@ -93,7 +93,11 @@
     <button class="tab-button" onclick="openTab('crear')">Crear Empleado</button>
     <button class="tab-button" onclick="openTab('actualizarna')">Actualizar Empleado</button>
     <button class="tab-button" onclick="openTab('eliminar')">Eliminar Empleado</button>
+
 </div>
+<form th:action="@{/graficas}" method="get" >
+    <button type="submit">Ir a graficas</button>
+</form>
 <div id="lista" class="tab">
     <table>
 
