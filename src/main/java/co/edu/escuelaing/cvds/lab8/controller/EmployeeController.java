@@ -21,7 +21,20 @@ public class EmployeeController {
         model.addAttribute("salarioPromedio", salarioPromedio);
         return "graficas"; // Nombre de la vista para mostrar el salario promedio.
     }
-
+    @GetMapping("/employees/creates")
+    public String createEmployees(@RequestParam Long num){
+        for (long employeeId = 1; employeeId <= num; employeeId++) {
+            employeeService.createEmployees(employeeId);
+        }
+        return "redirect:/employees"; // Redirige a la página de lista de empleados después de la creación.
+    }
+    @GetMapping("/graficas/creates")
+    public String graficas(@RequestParam Long num) {
+        for (long employeeId = 1; employeeId <= num; employeeId++) {
+            employeeService.createEmployees(employeeId);
+        }
+        return "graficas"; // Nombre de la vista para mostrar el salario promedio.
+    }
     @GetMapping("/employees")
     public String employees(Model model) {
         List<Employee> employeeList = employeeService.getAll();
@@ -38,7 +51,7 @@ public class EmployeeController {
     @PostMapping("/employees/update")
     public String updateEmployee(@RequestParam Long employeeId, String firstName,String lastName,SexoBiologico sexoBiologico, String role ,String salary, String idEmpresa){
         employeeService.updateEmployee(employeeId, firstName, lastName, sexoBiologico, role, salary, idEmpresa);
-        return "redirect:/graficas"; // Redirige a la página de lista de empleados después de la actualización.
+        return "redirect:/employees"; // Redirige a la página de lista de empleados después de la actualización.
     }
 
     @PostMapping("/employees/delete")

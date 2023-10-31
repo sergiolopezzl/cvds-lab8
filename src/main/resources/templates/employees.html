@@ -15,14 +15,19 @@
         .tab {
             display: none;
         }
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
         table {
             margin: 0 auto;
             border-collapse: collapse;
             width: 70%;
         }
         th, td {
-            border: 3px solid #ccc;
-            padding: 20px;
+            border: 2px solid #ccc;
+            padding: 10px;
         }
         th {
             background-color: #f0f0f0;
@@ -48,25 +53,25 @@
             padding: 20px 30px;
             border: none;
             cursor: pointer;
-            font-size: 20px;
-            border-radius: 20px; /* Redondear los botones */
+            font-size: 18px;
+            border-radius: 10px; /* Redondear los botones */
         }
         button:hover {
             background-color: #347C24;
         }
         .tabs {
             display: flex;
-            justify-content: space-between;
-            margin: 50px;
+            justify-content: space-around;
+            margin: 20px;
         }
         .tab-button {
             background-color: #DA2DE8;
             color: #fff;
-            padding: 30px 50px;
+            padding: 20px 40px;
             border: none;
             cursor: pointer;
-            font-size: 20px;
-            border-radius: 20px; /* Redondear los botones */
+            font-size: 18px;
+            border-radius: 10px; /* Redondear los botones */
         }
         .tab-button:hover {
             background-color: #6A1F70;
@@ -84,6 +89,11 @@
             color: #333;
             font-size: 14px;
         }
+        .bottom-right {
+            position: fixed;
+            bottom: 10px; /* Ajusta la distancia desde la parte inferior según tus necesidades */
+            right: 10px; /* Ajusta la distancia desde la derecha según tus necesidades */
+        }
     </style>
 </head>
 <body>
@@ -95,8 +105,10 @@
     <button class="tab-button" onclick="openTab('eliminar')">Eliminar Empleado</button>
 
 </div>
-<form th:action="@{/graficas}" method="get" >
-    <button type="submit">Ir a graficas</button>
+<form th:action="@{/employees/creates}" method="get" >
+    <label for="num">Numero de empleados a crear Automatico:*</label>
+    <input type="number" id="num" name="num" required><br>
+    <button type="submit">Crear Empleados Automatico</button>
 </form>
 <div id="lista" class="tab">
     <table>
@@ -202,6 +214,12 @@
         <button type="submit">Eliminar Empleado</button>
     </form>
 </div>
+<div class="bottom-right">
+    <form th:action="@{/graficas}" method="get">
+        <button type="submit">Ir a gráficas</button>
+    </form>
+</div>
+
 
 <script>
     function openTab(tabName) {

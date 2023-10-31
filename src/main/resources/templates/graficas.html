@@ -5,7 +5,7 @@
     <!-- Incluye la librería Google Charts -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <meta charset="UTF-8">
-    <title>Gestión de Empleados</title>
+    <title>Graficas/Metricas de Empleados</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,7 +27,7 @@
             border: none;
             cursor: pointer;
             font-size: 18px;
-            border-radius: 20px;
+            border-radius: 10px;
             transition: background-color 0.3s;
         }
         .tab-button:hover {
@@ -50,6 +50,7 @@
             background-color: #f0f0f0;
         }
         form {
+            margin: 20px;
             text-align: center;
         }
         label {
@@ -59,17 +60,17 @@
         }
         input {
             padding: 8px;
-            width: 60%;
+            width: 40%;
             margin-bottom: 10px;
         }
         button {
             background-color: #5CD940;
             color: #fff;
-            padding: 10px 20px;
+            padding: 20px 30px;
             border: none;
             cursor: pointer;
-            font-size: 16px;
-            border-radius: 20px;
+            font-size: 18px;
+            border-radius: 10px;
             transition: background-color 0.3s;
         }
         button:hover {
@@ -84,10 +85,15 @@
             color: #333;
             font-size: 14px;
         }
+        .bottom-right {
+            position: fixed;
+            bottom: 10px; /* Ajusta la distancia desde la parte inferior según tus necesidades */
+            right: 10px; /* Ajusta la distancia desde la derecha según tus necesidades */
+        }
     </style>
 </head>
 <body>
-<h1>Gestión de Empleados</h1>
+<h1>Graficas/Metricas de Empleados</h1>
 <div class="tabs">
     <button class="tab-button" onclick="openTab('salaryHistogramChart')">Histograma de Salario</button>
     <button class="tab-button" onclick="openTab('employeesPerCompanyChart')"># Empleados por empresa</button>
@@ -111,7 +117,17 @@
 <div class="tab-content" id="personsByGenderChart">
     <!-- Contenido de Persona por sexo en la base de datos -->
 </div>
+<div class="bottom-right" >
+    <form th:action="@{/employees}" method="get" >
+        <button type="submit">Regresar</button>
+    </form>
+</div>
 
+<form th:action="@{/graficas/creates}" method="get" >
+    <label for="num">Numero de empleados a crear Automatico:*</label>
+    <input type="number" id="num" name="num" required><br>
+    <button type="submit">Crear Empleados Automatico</button>
+</form>
 <script>
     google.charts.load('current', { 'packages': ['corechart'] });
 

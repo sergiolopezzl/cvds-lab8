@@ -1,13 +1,16 @@
 package co.edu.escuelaing.cvds.lab8.model;
-
+import co.edu.escuelaing.cvds.lab8.model.Listas;
 import jakarta.persistence.*;
-
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Objects;
 
 
 @Entity
 @Table(name = "EMPLOYEE")
 public class Employee {
+
+
     @Id
     @Column(name = "employeeId")
     private Long employeeId;
@@ -25,8 +28,15 @@ public class Employee {
     private String idEmpresa;
 
 
-    public Employee() {
-
+    public Employee(Long employeeId) {
+        Random random = new Random();
+        this.employeeId = employeeId;
+        this.firstName = getRandomName();
+        this.lastName = getRandomApellido();
+        this.sexoBiologico = SexoBiologico.values()[random.nextInt(SexoBiologico.values().length)];
+        this.role = "Empleado";
+        this.salary = String.valueOf(random.nextInt(100000) + 300); // Salario aleatorio entre 30,000 y 39,999
+        this.idEmpresa = getRandomNIT();
     }
 
     public Employee(Long employeeId, String firstName, String lastName, SexoBiologico sexoBiologico, String role, String salary, String idEmpresa) {
@@ -37,6 +47,10 @@ public class Employee {
         this.role = role;
         this.salary = salary;
         this.idEmpresa = idEmpresa;
+    }
+
+    public Employee() {
+
     }
 
     public Long getEmployeeId() {
@@ -122,4 +136,36 @@ public class Employee {
                 ", idEmpresa='" + idEmpresa + '\'' +
                 '}';
     }
+
+    private String getRandomName() {
+        Random random = new Random();
+        Listas lista = new Listas();
+        ArrayList<String> nombres = lista.getNombres();
+        System.out.println(nombres.size()+"rere");
+        int index = random.nextInt(nombres.size());
+        String nombre = nombres.get(index);
+        nombres.remove(index); // Evita repetir nombres
+        return nombre;
+    }
+
+    private String getRandomApellido() {
+        Random random = new Random();
+        Listas lista = new Listas();
+        ArrayList<String> apellidos = lista.getApellidos();
+        int index = random.nextInt(apellidos.size());
+        String apellido = apellidos.get(index);
+        apellidos.remove(index); // Evita repetir apellidos
+        return apellido;
+    }
+
+    private String getRandomNIT() {
+        Random random = new Random();
+        Listas lista = new Listas();
+        ArrayList<String> nits = lista.getNITs();
+        int index = random.nextInt(nits.size());
+        String nit = nits.get(index);
+        nits.remove(index); // Evita repetir NITs
+        return nit;
+    }
+
 }

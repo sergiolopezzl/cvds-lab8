@@ -24,7 +24,10 @@ public class EmployeeService {
         Employee employee = new Employee(id, name, lastname, sexoBiologico, role, salary, idEmpresa);
         employeeRepository.save(employee);
     }
-
+    public void createEmployees(Long id) {
+        Employee employee = new Employee(id);
+        employeeRepository.save(employee);
+    }
     public Employee getEmployeeById(Long id) {
         return employeeRepository.findById(id).orElse(null);
     }
@@ -69,4 +72,6 @@ public class EmployeeService {
 
     public void updateEmployee(Long employeeId, Employee employee) {
     }
+
+
 }
