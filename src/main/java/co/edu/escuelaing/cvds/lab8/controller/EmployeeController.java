@@ -33,13 +33,46 @@ public class EmployeeController {
         for (long employeeId = 1; employeeId <= num; employeeId++) {
             employeeService.createEmployees(employeeId);
         }
+        for (long employeeId = 1; employeeId <= num; employeeId++) {
+            int count = 0;
+            if(employeeService.getEmployeeById(employeeId).getSexoBiologico() == SexoBiologico.MASCULINO){
+                count +=1;
+            };
+            employeeService.setCantidad(count);
+        }
+
         return "graficas"; // Nombre de la vista para mostrar el salario promedio.
     }
+
     @GetMapping("/employees")
     public String employees(Model model) {
         List<Employee> employeeList = employeeService.getAll();
-        //employeeService.createEmployee(id,name);
+        Double sumaList = employeeService.getSumas();
+
+        // Calcula la suma de personas por sexo
+        Double sumaMasculino = (double) employeeList.stream()
+                .filter(e -> e.getSexoBiologico() == SexoBiologico.MASCULINO)
+                .count();
+
+        Double sumaFemenino = (double) employeeList.stream()
+                .filter(e -> e.getSexoBiologico() == SexoBiologico.FEMENINO)
+                .count();
+
+        Double sumaIntersexual = (double) employeeList.stream()
+                .filter(e -> e.getSexoBiologico() == SexoBiologico.INTERSEXUAL)
+                .count();
+
+        Double sumaNoEspecificado = (double) employeeList.stream()
+                .filter(e -> e.getSexoBiologico() == SexoBiologico.NO_ESPECIFICADO)
+                .count();
+
         model.addAttribute("employeeList", employeeList);
+        model.addAttribute("sumaMasculino", sumaMasculino);
+        model.addAttribute("sumaFemenino", sumaFemenino);
+        model.addAttribute("sumaIntersexual", sumaIntersexual);
+        model.addAttribute("sumaNoEspecificado", sumaNoEspecificado);
+        model.addAttribute("sumaTotal", sumaList);
+
         return "employees";
     }
     @PostMapping("/employees/create")

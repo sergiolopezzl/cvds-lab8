@@ -34,7 +34,19 @@ public class EmployeeService {
     public List<Employee> getAll(){
         return employeeRepository.findAll();
     }
+    public double getSumas(){
+        List<Employee> employees = employeeRepository.findAll();
+        if (employees.isEmpty()) {
+            return 0.0; // Manejo de caso vacío para evitar divisiones por cero.
+        }
 
+        double totalSalario = employees.stream()
+                .mapToDouble(employee -> Double.parseDouble(employee.getSalary()))
+                .sum();
+
+        return totalSalario / employees.size();
+
+    }
     public void updateEmployee(Long id, String name,String lastname,SexoBiologico sexoBiologico, String role,String salary, String idEmpresa){
         Employee employee = employeeRepository.getReferenceById(id);
 
@@ -74,4 +86,8 @@ public class EmployeeService {
     }
 
 
+    public void setCantidad(int count) {
+
+
+    }
 }

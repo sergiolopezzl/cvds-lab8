@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico de Distribución por Sexo</title>
+    <!-- Asegúrate de incluir la biblioteca de Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+<div id="lista" class="tab">
+    <table>
+
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Sexo Biologico</th>
+            <th>Rol</th>
+            <th>Salario</th>
+            <th>Empresa</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employeeList}">
+            <td th:text="${employee.employeeId}"></td>
+            <td th:text="${employee.firstName}"></td>
+            <td th:text="${employee.lastName}"></td>
+            <td th:text="${employee.sexoBiologico}"></td>
+            <td th:text="${employee.role}"></td>
+            <td th:text="${employee.salary}"></td>
+            <td th:text="${employee.idEmpresa}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Agrega un div para el gráfico -->
+<div id="grafico-sexo"></div>
+
+<script>
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            const table = document.getElementById('lista');
+            const data = new google.visualization.DataTable();
+            data.addColumn('string', 'Sexo');
+            data.addColumn('number', 'Cantidad');
+
+            const sexCount = {};
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            for (let i = 0; i < rows.length; i++) {
+                const sexo = rows[i].getElementsByTagName('td')[3].textContent; // Suponemos que el sexo está en la columna 4 (0-indexed)
+                sexCount[sexo] = (sexCount[sexo] || 0) + 1;
+            }
+
+            const sexData = [];
+            for (const sexo in sexCount) {
+                sexData.push([sexo, sexCount[sexo]]);
+            }
+
+            data.addRows(sexData);
+
+            const options = {
+                title: 'Distribución por Sexo',
+                width: 600,
+                height: 400,
+            };
+
+            const chart = new google.visualization.BarChart(document.getElementById('grafico-sexo'));
+            chart.draw(data, options);
+        }
+    </script>
+</body>
+</html>

@@ -97,6 +97,8 @@
     </style>
 </head>
 <body>
+
+
 <h1>Gestión de Empleados</h1>
 <div class="tabs">
     <button class="tab-button" onclick="openTab('lista')">Lista de Empleados</button>
@@ -136,6 +138,39 @@
         </tr>
         </tbody>
     </table>
+    <h2>Tabla de Cantidad por Sexo</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Sexo</th>
+            <th>Cantidad</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Masculino</td>
+            <td th:text="${sumaMasculino}"></td>
+        </tr>
+        <tr>
+            <td>Femenino</td>
+            <td th:text="${sumaFemenino}"></td>
+        </tr>
+        <tr>
+            <td>Intersexual</td>
+            <td th:text="${sumaIntersexual}"></td>
+        </tr>
+        <tr>
+            <td>No Especificado</td>
+            <td th:text="${sumaNoEspecificado}"></td>
+        </tr>
+        <tr>
+            <td>Promedio de salarios</td>
+            <td th:text="${sumaTotal}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
 </div>
 <div id="crear" class="tab">
     <h1>Crear Empleado</h1>
